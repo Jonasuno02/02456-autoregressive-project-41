@@ -309,7 +309,7 @@ import csv
 
 with open('results/sequences/generated_sequences_MLP.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['Sequence'])
+    writer.writerow(['sequence'])
     for seq in ole_done_done:
         writer.writerow([seq])
 
