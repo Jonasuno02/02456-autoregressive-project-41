@@ -47,14 +47,9 @@ DEFAULT_CHUNK_SIZE = 64
 
 
 def pick_device(cpu_only=False):
-    """Prefer CUDA, then Apple MPS, and fall back to CPU."""
-    if cpu_only:
-        return torch.device("cpu")
-    if torch.cuda.is_available():
-        return torch.device("cuda")
-    if torch.backends.mps.is_available():
-        return torch.device("mps")
-    return torch.device("cpu")
+    """cuda when there is one, unless `cpu_only`. CPU works but is slow enough to hurt."""
+    return torch.device("cpu" if cpu_only or not torch.cuda.is_available() else "cuda")
+
 
 def weights_dir():
     """The local directory with the ESMFold weights, downloading them (~8 GB) if they are missing.
