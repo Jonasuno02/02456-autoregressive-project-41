@@ -277,7 +277,7 @@ idx_to_token = {v: k for k, v in train_data.vocab.items()}
 # With trained model, generate seqeunces:
 max_length=129
 ole_done_done = [[]]
-for j in range(50): # Generate 10 sequences
+for j in range(200): # Generate 10 sequences
     ole = torch.Tensor([[0,0,1]]).int()
     ole_done = [1]
     for i in range(max_length-1):
