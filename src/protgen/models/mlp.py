@@ -276,10 +276,10 @@ idx_to_token = {v: k for k, v in train_data.vocab.items()}
 
 # With trained model, generate seqeunces:
 max_length=129
-ole = torch.Tensor([[0,0,1]]).int()
-ole_done = [1]
 ole_done_done = [[]]
-for j in range(50): # Generate 10 sequences
+for j in range(100): # Generate 10 sequences
+    ole = torch.Tensor([[0,0,1]]).int()
+    ole_done = [1]
     for i in range(max_length-1):
         tr_output = net(ole)
         # next_token = tr_output.argmax() NOT ARGMAX but a smapling over the dsitribution. Otherwise we would always generate the same string! We need this wee bit of "noise" to make this a generative model that makes snese.
@@ -299,10 +299,11 @@ for j in range(50): # Generate 10 sequences
         ole_done.append(next_token[0].item())
         # if next_token.item() == 2: # If the next token is the end of sequence token, then we stop generating.
         #     break
-    ole_done = ole_done[1:]
+    #print(f"Generated sequence {j+1}: {ole_done}")
+    ole_done = ole_done[1:] # remove beging of string token
     tokens = [idx_to_token[i] for i in ole_done]
     ole_done_done.append("".join(tokens))
-ole_done_done = ole_done_done[1:]
+ole_done_done = ole_done_done[1:] # Remove the first black sequence this variable was initalised with.
 
 # Make the CSV file:
 import csv
