@@ -279,7 +279,7 @@ max_length=129
 ole = torch.Tensor([[0,0,1]]).int()
 ole_done = [1]
 ole_done_done = [[]]
-for j in range(100): # Generate 10 sequences
+for j in range(50): # Generate 10 sequences
     for i in range(max_length-1):
         tr_output = net(ole)
         # next_token = tr_output.argmax() NOT ARGMAX but a smapling over the dsitribution. Otherwise we would always generate the same string! We need this wee bit of "noise" to make this a generative model that makes snese.
