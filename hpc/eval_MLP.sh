@@ -22,7 +22,4 @@
 
 source hpc/env.sh
 
-nvidia-smi                      # memory used / total per device, and whose processes
-export CUDA_VISIBLE_DEVICES=1   # the device number from nvidia-smi
-
 uv run --group eval python eval/eval.py --samples results/sequences/generated_sequences_MLP.csv --fold   
