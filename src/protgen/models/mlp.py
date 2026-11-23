@@ -163,9 +163,13 @@ def pred(X):
     y = net(X)
     return y.data.numpy()
 
-# training loop
+# Training loop
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu") #kør den på GPU hvis den er der
+net.to(device) #Flytter det hele
+
 for e in range(num_epochs):
     x, x_shifted, y, length = next(iter(train_loader))
+    x, x_shifted, y, length = x.to(device), x_shifted.to(device), y.to(device), length.to(device) #nu rykker vi dataen hen til gpuen
     x = F.pad(x, (2, 0, 0, 0)) # Zero padding with 2 columns to the left.
     for i in range(x.shape[0]):
         progress = 0
